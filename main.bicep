@@ -13,11 +13,11 @@ param AppGatewaySubnetPrefix string = '10.0.0.0/28'
 @description('Subnet prefix of the Private Endpoint of the Web App ')
 param PrivateEndPointSubnetPrefix string = '10.0.1.0/28'
 
-@description('Name of your Private Endpoint')
-param privateEndpoint_name string='privateendpoint'
-
 @description('Name of the Subnet for PrivateEndpoint')
 param subnet1_name string ='subnetPE'
+
+@description('Name of your Private Endpoint')
+param privateEndpoint_name string='privateendpoint'
 
 @description('Name of the Subnet for AppLicationGateway')
 param subnetName string = 'appGatewaySubnet'
