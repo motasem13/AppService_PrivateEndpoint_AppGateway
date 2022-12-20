@@ -31,6 +31,22 @@ param privateDNSZone_name string = 'privatelink.azurewebsites.net'
 @description('Virtual Network Resouce Name')
 param virtualNetworkNameResource string = 'virtualNetwork1'
 
+@allowed([
+  'B1'
+  'B2'
+  'B3'
+  'S1'
+  'S2'
+  'S3'
+  'P1v2'
+  'P2v2'
+  'P3v2'
+  'P1v3'
+  'P2v3'
+  'P3v3'
+])
+param ASPSKU string
+
 var applicationGatewayNameResource = '${siteName}-agw'
 var publicIPAddressNameResource = '${siteName}-pip'
 var hostingPlanNameResource = '${siteName}serviceplan'
@@ -197,7 +213,7 @@ resource hostingPlanName 'Microsoft.Web/serverfarms@2019-08-01' = {
     displayName: 'HostingPlan'
   }
   sku: {
-    name: 'S1'
+    name: ASPSKU
   }
   kind: 'app'
 }
