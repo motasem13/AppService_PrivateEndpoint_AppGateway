@@ -13,17 +13,17 @@ param AppGatewaySubnetPrefix string = '10.0.0.0/28'
 @description('Subnet prefix of the Private Endpoint of the Web App ')
 param PrivateEndPointSubnetPrefix string = '10.0.1.0/28'
 
-@description('Name of the Subnet for PrivateEndpoint')
-param subnet1_name string ='subnetPE'
-
 @description('Name of your Private Endpoint')
-param privateEndpoint_name string='privateendpoint'
+param privateEndpoint_name string = 'privateendpoint'
 
-@description('Name of the Subnet for AppLicationGateway')
+@description('Name of the Subnet for PrivateEndpoint')
+param subnet1_name string = 'subnetPE'
+
+@description('Name of the Subnet for ApplicationGateway')
 param subnetName string = 'appGatewaySubnet'
 
 @description('Link name between your Private Endpoint and your Web App')
-param privateLinkConnection_name string='privatelinkconnection'
+param privateLinkConnection_name string = 'privatelinkconnection'
 
 @description('Name must be privatelink.azurewebsites.net')
 param privateDNSZone_name string = 'privatelink.azurewebsites.net'
@@ -31,17 +31,12 @@ param privateDNSZone_name string = 'privatelink.azurewebsites.net'
 @description('Virtual Network Resouce Name')
 param virtualNetworkNameResource string = 'virtualNetwork1'
 
-
 var applicationGatewayNameResource = '${siteName}-agw'
 var publicIPAddressNameResource = '${siteName}-pip'
 var hostingPlanNameResource = '${siteName}serviceplan'
 
-
-
 var subnetRef = resourceId('Microsoft.Network/virtualNetworks/subnets', virtualNetworkNameResource, subnetName)
 var publicIPRef = publicIPAddressName.id
-
-
 
 resource publicIPAddressName 'Microsoft.Network/publicIPAddresses@2020-05-01' = {
   name: publicIPAddressNameResource
@@ -69,7 +64,7 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-05-01' = {
         properties: {
           addressPrefix: AppGatewaySubnetPrefix
         }
-      },  {
+      }, {
         name: subnet1_name
         properties: {
           addressPrefix: PrivateEndPointSubnetPrefix
@@ -78,7 +73,6 @@ resource virtualNetworkName 'Microsoft.Network/virtualNetworks@2020-05-01' = {
     ]
   }
 }
-
 
 resource ApplicationGateway 'Microsoft.Network/applicationGateways@2020-05-01' = {
   name: applicationGatewayNameResource
@@ -196,7 +190,6 @@ resource ApplicationGateway 'Microsoft.Network/applicationGateways@2020-05-01' =
   ]
 }
 
-
 resource hostingPlanName 'Microsoft.Web/serverfarms@2019-08-01' = {
   name: hostingPlanNameResource
   location: location
@@ -213,13 +206,10 @@ resource AppService 'Microsoft.Web/sites@2019-08-01' = {
   name: siteName
   location: location
   properties: {
-    
+
     serverFarmId: hostingPlanName.id
   }
 }
-
-
-
 
 resource PrivateEndpoint 'Microsoft.Network/privateEndpoints@2019-04-01' = {
   name: privateEndpoint_name
@@ -242,10 +232,6 @@ resource PrivateEndpoint 'Microsoft.Network/privateEndpoints@2019-04-01' = {
   }
 }
 
-
-
-
-
 resource privateDNSZone 'Microsoft.Network/privateDnsZones@2018-09-01' = {
   name: privateDNSZone_name
   location: 'global'
@@ -254,7 +240,7 @@ resource privateDNSZone 'Microsoft.Network/privateDnsZones@2018-09-01' = {
   ]
 }
 
-resource  privateDNSZonePrivateDNSZonelink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
+resource privateDNSZonePrivateDNSZonelink 'Microsoft.Network/privateDnsZones/virtualNetworkLinks@2018-09-01' = {
   parent: privateDNSZone
   name: '${privateDNSZone_name}-link'
   location: 'global'
@@ -280,5 +266,3 @@ resource privateEndpointDnsGroupname 'Microsoft.Network/privateEndpoints/private
     ]
   }
 }
-
-
