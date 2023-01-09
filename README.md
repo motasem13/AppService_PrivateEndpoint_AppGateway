@@ -2,6 +2,10 @@
 
 This template deploys an Application Gateway in Azure Virtual Network (subnet), a second subnet that containts a Private endpoint as an App Service interface, an App Service which is configured with a Private endpoint, everything is created with generated names, however, you can easily modify the template to use other default values or parameterize values. You can also 'bring your own' subnet, web app, application gateway or public ip, if you have any of the items already created.
 
+
+
+**Note: for production environment it is recommend having a custom domain (and associated certificate) available to avoid having to rely on the default ".azurewebsites" domain.  more details `[Manage traffic to App Service - Azure Application Gateway | Microsoft Learn](https://learn.microsoft.com/en-us/azure/application-gateway/configure-web-app?tabs=customdomain%2Cazure-portal)`**
+
 To deploy the resource use the following Azure CLI:
 
 ```
