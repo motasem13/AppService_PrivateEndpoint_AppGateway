@@ -5,7 +5,7 @@ This template deploys an Application Gateway in Azure Virtual Network (subnet), 
 
 
 
-**Note: for production environment it is recommend having a custom domain (and associated certificate) available to avoid having to rely on the default ".azurewebsites" domain.  more details: ** [Configure App Service with Application Gateway](https://learn.microsoft.com/en-us/azure/application-gateway/configure-web-app?tabs=customdomain,azure-portal)
+**Note: for production environment it is recommend having a custom domain (and associated certificate) available to avoid having to rely on the default ".azurewebsites" domain.  more details:** [Configure App Service with Application Gateway](https://learn.microsoft.com/en-us/azure/application-gateway/configure-web-app?tabs=customdomain,azure-portal)
 
 To deploy the resource use the following Azure CLI:
 
